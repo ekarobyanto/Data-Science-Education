@@ -1,0 +1,10 @@
+# K6 Load Test Results
+
+This directory contains timestamped results from k6 load tests.
+
+Results are automatically stored here when running tests via the Makefile:
+- `predict_YYYYMMDD_HHMMSS.txt` - Default predict.js test results
+- `randomized_YYYYMMDD_HHMMSS.txt` - Randomized payload test results
+- `arrival_rate_YYYYMMDD_HHMMSS.txt` - Arrival-rate (RPS) test results
+
+Files are named with timestamps for easy tracking of test runs over time.

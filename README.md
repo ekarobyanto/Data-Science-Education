@@ -4,6 +4,7 @@ Aplikasi machine learning untuk memprediksi performa siswa menggunakan Flask API
 
 ## 🏗️ Arsitektur
 
+### Standard Setup
 ```
 ┌─────────────────┐    HTTP     ┌─────────────────┐
 │   Frontend      │ ────────→   │    Backend      │
@@ -12,6 +13,17 @@ Aplikasi machine learning untuk memprediksi performa siswa menggunakan Flask API
 └─────────────────┘             └─────────────────┘
         │                               │
         └─── Tailwind CSS              └─── ML Model (Random Forest)
+```
+
+### Autoscaling Setup (Docker Swarm)
+```
+🌐 Nginx Load Balancer (localhost:3000, localhost:5000)
+    ↓
+├─→ 🔧 Backend: 2-10 replicas (autoscaled @ CPU > 70%)
+│   └─ Each: 1 CPU max, 1GB RAM max
+│
+└─→ 🎨 Frontend: 2-10 replicas (autoscaled @ CPU > 70%)
+    └─ Each: 1 CPU max, 1GB RAM max
 ```
 
 ## ✨ Features
@@ -59,9 +71,31 @@ cd "Data Science Education"
 # Backend API: http://localhost:5000
 ```
 
-### 3. Stop Services
+### 3. Setup dengan Autoscaling (Advanced)
+
+Untuk load yang tinggi, gunakan Docker Swarm dengan autoscaling:
+
+```bash
+# Deploy ke Docker Swarm
+make swarm-deploy
+
+# Jalankan autoscaler (di terminal terpisah)
+make autoscale-backend    # Terminal 1
+make autoscale-frontend   # Terminal 2
+
+# Akses aplikasi (sama)
+# Frontend: http://localhost:3000
+# Backend API: http://localhost:5000
+```
+
+📖 **Dokumentasi lengkap autoscaling**: Lihat [AUTOSCALING.md](AUTOSCALING.md)
+
+### 4. Stop Services
 ```bash
 ./docker-stop.sh
+
+# Atau jika menggunakan Swarm
+make swarm-remove
 ```
 
 ## 🛠️ Development Setup

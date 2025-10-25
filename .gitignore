@@ -79,3 +79,9 @@ coverage/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Load test results
+loadtests/results/*.txt
+
+# Nginx logs (if generated)
+nginx_logs/
