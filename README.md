@@ -62,7 +62,7 @@ cd "Data Science Education"
 ```
 
 ### 2. Setup dengan Docker (Recommended)
-```bash
+```bash 
 # Setup dan jalankan semua services
 ./docker-setup.sh
 
